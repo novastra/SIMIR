@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>SIM'IR | Calculer et comprendre l'impôt sur le revenu, un jeu d'enfant.</title>
+        <meta name="description" content="">
+		    <meta name="author" content="Novastra" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Calculer et comprendre l'impôt sur le revenu, un jeu d'enfant. Sim'IR est une application permettant le calcul simplifié de l'impot sur le revenu." />
+		    <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon"/>
+		    <link rel="icon" href="img/icon.ico" type="image/x-icon"/>
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css"> 
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>	
+
+    </head>
+    <body>
+	<!--[if lt IE 8]>
+		<p class="browserupgrade">Vous utilisez un navigateur <strong>obsolète</strong>. <a href="http://browsehappy.com/">Mettez à jour votre navigateur.</a></p>
+	<![endif]-->	
+    <header class="large">
+	<nav class="navbar navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Activer menu navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand logo" href="index.html"><span><p>Sim'IR</p></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+		<nav class="rollNav">
+			<a href="index.html"><span data-hover="Accueil">Accueil</span></a>
+			<a href="index.html#foyer"><span data-hover="Calculer">Calculer</span></a>
+			<a href="#"><span data-hover="Comparer">Comparer</span></a>
+		</nav>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>	
+	</header>
+
+    <div class="container-fluid">
+
+	   <!-- Montant IR -->
+
+      <div id="resultat" class="row">
+	    <hr> 
+        <div class="col-xs-12 text-center">
+        <h4>Votre impôt est de <input id="valIR" type="number" min="0" step="1" max="100000" maxlength="6" pattern="\d{6}" placeholder="0€" /></h4>
+        </div>        
+        </div>
+		      <hr> 
+
+      <!-- Equivalent -->
+	  <div id="equivalent">
+      <h3><span class='glyphicon glyphicon-tasks'></span> Ce qui represente&#8230;</h3>
+	  <div class="row descro">
+        <div class="col-md-3">
+        </div>
+
+        <div class="col-md-3 col-xs-6">
+			<div id="timo" class="radial-progress"><div class="circle"><div class="mask full"><div class="fill"></div></div><div class="mask half"><div class="fill"></div><div class="fill fix"></div></div><div class="shadow"></div></div><div class="inset"><div class="percentage"><div class="numbers"><span id="tempos"></span></div></div></div></div>
+        </div>
+
+        <div class="col-md-4 col-xs-6">
+			<p id="timoDescr" class="descrEquiv"></p>
+			<a id="timoSource" class="sourcEquiv"></a>
+        </div>
+
+		<div class="col-md-2">
+        </div>
+      </div>	
+
+<p class="ou">Ou ...</p>
+
+	  <div class="row descro">
+        <div class="col-md-3">
+        </div>
+
+        <div class="col-md-3 col-xs-6">
+			<div id="baro" class="baro"><ul></ul></div>
+        </div>
+
+        <div class="col-md-4 col-xs-6">
+			<p id="baroDescr" class="descrEquiv"></p>
+			<a id="baroSource" class="sourcEquiv"></a>
+        </div>
+
+		<div class="col-md-2">
+        </div>
+      </div>
+
+<p class="ou">Ou ...</p>
+
+	  <div class="row descro">
+        <div class="col-md-3">
+        </div>
+
+        <div class="col-md-3 col-xs-6">
+				<div id="calend">
+		<div class="time-box">
+			<div class="time-box-inner days_dash">
+				<span class="time-number">
+					<span id="jours" class="digit"></span>
+				</span>
+				<span class="time-name">jours</span>
+			</div>
+		</div>
+
+		<div class="time-box">
+			<div class="time-box-inner hours_dash">
+				<span class="time-number">
+					<span id="heures" class="digit"></span>	
+				</span>
+				<span class="time-name">heures</span>
+			</div>
+		</div>
+
+		<div class="time-box">
+			<div class="time-box-inner minutes_dash">
+				<span class="time-number">
+					<span id="minutes" class="digit"></span>
+				</span>
+				<span class="time-name">minutes</span>
+			</div>
+		</div>
+	</div>
+        </div>
+
+        <div class="col-md-4 col-xs-6">
+			<p id="calenDescr" class="descrEquiv"></p>
+			<a id="calenSource" class="sourcEquiv"></a>
+        </div>
+
+		<div class="col-md-2">
+        </div>
+      </div>
+
+<div class="separat"></div>
+<button id="reload">
+<ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <p>Ou encore...  </p>
+  </button>      
+      </div>	   
+<div id="cookie">Ce site utilise des cookies pour à des fins statistiques et d'amélioration de l'expérience utilisateur.</div>
+<footer>
+&copy; Novastra 2016
+<button id="apropos">| A propos |</button>
+<button id="licence">Source</button>
+<div id="social">
+<a href="mailto:?subject=SIM%20IR,%20Calculer%20et%20comprendre%20l'impôt%20sur%20le%20revenu,%20un%20jeu%20d'enfant.&amp;body=Voici%20une%20démo%20d'application%20de%20simulation%20de%20l'impôt%20sur%20le%20revenu%20:%20novastra.net/SIMIR" class="icon-button mail"><i class="icon-mail" aria-hidden="true"></i><span></span></a>
+<a target="_blank" href="https://plus.google.com/share?url=http://www.novastra.net/SIMIR" class="icon-button google-plus"><i class="icon-google-plus" aria-hidden="true"></i><span></span></a>
+<a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=http://www.novastra.net/SIMIR&title=Calculer%20et%20comprendre%20l'impôt%20sur%20le%20revenu,%20un%20jeu%20d'enfant." class="icon-button linkedin"><i class="icon-linkedin" aria-hidden="true"></i><span></span></a>
+<a target="_blank" href="https://twitter.com/intent/tweet?text=Calculer%20et%20comprendre%20l'impôt%20sur%20le%20revenu,%20un%20jeu%20d'enfant.&url=http://www.novastra.net/SIMIR&hashtags=CodeImpot&related=%5Fnalliot%5F" class="icon-button twitter"><i class="icon-twitter" aria-hidden="true"></i><span></span></a>
+</div>
+</footer>
+    </div> <!-- /container -->  
+<div class="overlay"></div>      
+<div class="message"></div>
+  <script src="js/vendor/jquery-1.11.2.min.js"></script>
+  <script src="js/vendor/jquery-ui.js"></script>
+  <script src="js/vendor/jquery.ui.touch-punch.min.js"></script>
+  <script src="js/vendor/bootstrap.min.js"></script>
+  <script src="js/main2.js"></script>
+  <!--Social-->
+  <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
+
+</body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76822619-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
