@@ -1,6 +1,9 @@
 # SIMIR
 Appli de simulation d'impôt sur le revenu et de visualisation d'équivalents en termes de services publics.
 
+## Demo
+[Sim'IR Beta](http://novastra.net/SIMIR/)
+
 ## Fonctionnement
 L'application fonctionne en 3 étapes :
 1. constitution du foyer par drag and drop;
