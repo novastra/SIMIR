@@ -185,5 +185,5 @@ $('#valIR').on("keyup", function(e) {
 });
 
   $('#resultat').fadeIn( 1000 );
-  
+  $('#valIR').focus();
 });
