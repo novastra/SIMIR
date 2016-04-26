@@ -6,6 +6,7 @@ Appli de simulation d'impôt sur le revenu et de visualisation d'équivalents en
 
 ## Fonctionnement
 L'application fonctionne en 3 étapes :
+
 1. constitution du foyer par drag and drop;
 2. calcul de l'IR en temps réel (via [API IR OpenFisca](https://git.framasoft.org/openfisca/calculette-impots-web-api));
 3. et à rapprocher cette somme avec des éléments de comparaison en termes de services publics (Education, médecine, etc.).
