@@ -56,32 +56,30 @@ var jauge = function(){
       x++;  
     };      
     $('#timoDescr').html(Math.round(ratioo) + " " + descr + " (" + vizu.eur + "€)");
-  var percentos = vizu.temps;
+    var percentos = vizu.temps;
   }
   //si - d'un seul element afficher le % de temps complet
   else{
-    var percentos = Math.round(resultos / vizu.min); //nb de minutes avec IR
     $('#timoDescr').html("d'une " + vizu.descr + " (" + vizu.temps + "minutes - " + vizu.eur + "€)");
+    var percentos = Math.round(resultos / vizu.min); //nb de minutes avec IR
   }
-
-  $("#tempos").html(percentos + " min"); //laisser avant rad
+  var radios = percentos;
 
   // temps affiché par jauge
-  if (parseInt(vizu.temps) <= 60){
+  if (radios <= 60){
     $(".radial-progress .circle .mask .fill").css({"background-color": "#97A71D"});
-    var percentos = vizu.temps;
   }
-  else if (parseInt(vizu.temps) > 120){ 
+  else if (radios > 120){ 
     $(".radial-progress .circle .mask .fill").css({"background-color": "#E03622"});
-    var percentos = 60;
+    var radios = 60;
   }
-  else if (parseInt(vizu.temps) > 60) {
+  else if (radios > 60) {
     $(".radial-progress .circle .mask .fill").css({"background-color": "#FE7400"});
-    var percentos = 60;
+    var radios = 60;
   }
 
-  var rotRad = 360 * (percentos / 60); //degré rad
-
+  var rotRad = 360 * (radios / 60); //degré rad
+  $("#tempos").html(percentos + " min"); 
   $('#timoSource').html("Source : " + vizu.source).attr("href", vizu.source).attr('target','_blank'); 
   $(".fill.fix").css({"transform": "rotate(" + rotRad + "deg"});
   $(".mask.full, .fill").css({"transform": "rotate(" + (rotRad/2) + "deg"});
