@@ -295,6 +295,9 @@ var calculat = function(){
 
       if (resultos > 0){
         $('#shEquiv').fadeIn( 300 );
+        baro();
+        calendar();
+        jauge();
         $('footer').before( "<div class='trigSep'></div><div class='trigView'></div>" );
         // //plugin inview a utiliser pour trigger les fonctions d'affichage des effets
         $('.trigView').one('inview', function (event, visible) {
@@ -308,8 +311,11 @@ var calculat = function(){
         });
       };
     });
-
-
+  }
+  else{
+    resultos = 0;
+    $("#result").html(resultos + "€");
+    $("#equivalent").fadeOut( 300 );
   };
 };
 
@@ -326,49 +332,56 @@ var supprElem = function(lol){
 };
 
 
+
 // Maj de la jauge de temps
 var jauge = function(){
   $('#timo').fadeIn(300);
 
   var possibJauge = [
-  {ID:'1', eur:'6200', temps:'110', min:'56.3636', metier:'infirmier', descr:'opération de l\'appendicite', source:'http:\/\/www.insee.fr\/fr\/themes\/theme.asp?theme=6&sous_theme=3'},	
-  {ID:'2', eur:'2500', temps:'30', min:'83.3333', metier:'infirmier2', descr:'opération des amygdales', source:'http:\/\/www.insee.fr\/fr\/themes\/theme.asp?theme=6&sous_theme=3'},	
-  {ID:'3', eur:'8000', temps:'60', min:'133.3333', metier:'docteur', descr:'pose de prothèse de hanche', source:'http:\/\/www.insee.fr\/fr\/themes\/theme.asp?theme=6&sous_theme=3'},	
+  {ID:'1', eur:'6200', temps:'110', min:'56.3636', metier:'infirmier', descr:'opération de l\'appendicite', source:'http:\/\/www.insee.fr\/fr\/themes\/theme.asp?theme=6&sous_theme=3'},  
+  {ID:'2', eur:'2500', temps:'30', min:'83.3333', metier:'infirmier2', descr:'opération des amygdales', source:'http:\/\/www.insee.fr\/fr\/themes\/theme.asp?theme=6&sous_theme=3'},  
+  {ID:'3', eur:'8000', temps:'60', min:'133.3333', metier:'docteur', descr:'pose de prothèse de hanche', source:'http:\/\/www.insee.fr\/fr\/themes\/theme.asp?theme=6&sous_theme=3'}, 
   {ID:'4', eur:'50000', temps:'300', min:'166.6667', metier:'docteur', descr:'greffe du cœur', source:'http:\/\/www.insee.fr\/fr\/themes\/theme.asp?theme=6&sous_theme=3'}
-  ];	
+  ];  
 
   var vizu = possibJauge[Math.floor(Math.random() * possibJauge.length)]; //exemple retenu
   var ratioo = resultos / parseInt(vizu.eur);
   
+  //si + d'un seul element afficher le temps complet et le ratio
   if (Math.floor(ratioo) > 1){
     var x = 1;
-    var descr = vizu.descr.split(' ')[0] + "s";
+    var descr = vizu.descr.split(' ')[0] + "s"; //pluriel
     while ( x <= (vizu.descr.split(' ').length - 1) ) {
       descr += " " + vizu.descr.split(' ')[x];
-      x++;	
-    };	
-    // temps affich
-    if (parseInt(vizu.temps) <= 60){
-      $(".radial-progress .circle .mask .fill").css({"background-color": "#97A71D"});
-      var percentos = vizu.temps;
-    }
-    else if (parseInt(vizu.temps) > 120){	
-      $(".radial-progress .circle .mask .fill").css({"background-color": "#E03622"});
-      var percentos = 60;
-    }
-    else if (parseInt(vizu.temps) > 60) {
-      $(".radial-progress .circle .mask .fill").css({"background-color": "#FE7400"});
-      var percentos = 60;
-    }	    
+      x++;  
+    };      
     $('#timoDescr').html(Math.round(ratioo) + " " + descr + " (" + vizu.eur + "€)");
-	$("#tempos").html(vizu.temps + " min");
+  var percentos = vizu.temps;
   }
+  //si - d'un seul element afficher le % de temps complet
   else{
-    var percentos = Math.round(resultos / vizu.min);  //nb de minutes avec IR
+    var percentos = Math.round(resultos / vizu.min); //nb de minutes avec IR
     $('#timoDescr').html("d'une " + vizu.descr + " (" + vizu.temps + "minutes - " + vizu.eur + "€)");
-	$("#tempos").html(percentos + " min");
   }
+
+  $("#tempos").html(percentos + " min"); //laisser avant rad
+
+  // temps affiché par jauge
+  if (parseInt(vizu.temps) <= 60){
+    $(".radial-progress .circle .mask .fill").css({"background-color": "#97A71D"});
+    var percentos = vizu.temps;
+  }
+  else if (parseInt(vizu.temps) > 120){ 
+    $(".radial-progress .circle .mask .fill").css({"background-color": "#E03622"});
+    var percentos = 60;
+  }
+  else if (parseInt(vizu.temps) > 60) {
+    $(".radial-progress .circle .mask .fill").css({"background-color": "#FE7400"});
+    var percentos = 60;
+  }
+
   var rotRad = 360 * (percentos / 60); //degré rad
+
   $('#timoSource').html("Source : " + vizu.source).attr("href", vizu.source).attr('target','_blank'); 
   $(".fill.fix").css({"transform": "rotate(" + rotRad + "deg"});
   $(".mask.full, .fill").css({"transform": "rotate(" + (rotRad/2) + "deg"});
