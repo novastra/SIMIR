@@ -17,7 +17,8 @@ L'application fonctionne en 3 étapes :
 ![Comparaison de l'IR](/screenshots/SIMIR_2.png?raw=true)
 
 ## Todo :
-- Ajouter des élements pour composer le foyer avec un classement par catégorie (foyer, situation, bnc bic ba)
+- ~~Ajouter des élements pour composer le foyer avec un classement par catégorie (foyer, situation, bnc bic ba)~~
+- Ajouter une règle pour gérer la distinction entre revenus adulte 1 et adulte 2, utiliser le second set de variables pour conjoints si 2 revenus du meme type sont présents
 - Séparer la partie visualisation du fichier js et augmenter le nombre de cas/ dataviz
 - Faire un rapprochement avec la logique du projet [CleverTaxes](https://github.com/florent-andre/CleverTaxes) pour la partie comparer l'impot
 - Permettre le reverse drag and drop vers elements pour suppr un élément

@@ -44,6 +44,7 @@ body {
   padding-left: 5px;
 }
 
+#accueil a.btnn,
 .btnn{
   background-color: #333;
   background-color: rgba(0, 0, 0, 0.2);
@@ -56,6 +57,9 @@ body {
   transition: all 0.33s ease;
 }
 
+#accueil a.btnn:hover,
+#accueil a.btnn:focus,
+#accueil a.btnn:active,
 .btnn:hover,
 .btnn:focus,
 .btnn:active{
@@ -135,7 +139,7 @@ body {
 }
 
 #accueil div{
-  padding: 5em;
+  padding: 4em;
 }
 
 #foyer{
@@ -420,6 +424,7 @@ header.large .navbar-brand{
 
 #contFoyer {
   min-width: 150px;
+  height: 200px;
   list-style-type: none;
   background-color: #E3F2FD;
 }
@@ -439,13 +444,31 @@ header.large .navbar-brand{
   transform: scale(1.25);
 }
 
+#contShop{
+  padding-right: 15px;
+}
+
 /*ul des elements à ajouter au foyer*/
 #shopElements { 
-  min-width: 200px;
+  height: 200px;
+  overflow-y:auto;
   list-style-type: none;
   float: right;
   background-color: #f2f2f2;
   width: 100%;
+  padding-left: 0px !important;
+}
+
+#shopElements div{ 
+    padding: 0 !important;
+}
+
+#shopElements h4{ 
+  text-align: center;
+  color: #efefef;
+  background-color: #2D2B84;
+  margin: 0px;
+  padding: 0px;
 }
 
 /*Element du shop*/
@@ -476,12 +499,20 @@ header.large .navbar-brand{
   background-image: url("../img/pix/enfant.gif");
 } 
 
-.revenu{
+.revenu, .soustract{
   float: right;
 }
 
 .salaire{
   background-image: url('../img/pix/revenu.gif');
+}
+
+.bic{
+  background-image: url('../img/pix/bic.gif');
+}
+
+.bnc{
+  background-image: url('../img/pix/bnc.gif');
 }
 
 .foncier{
@@ -498,6 +529,14 @@ header.large .navbar-brand{
 
 .pacs{
   background-image: url('../img/pix/pacs.png');
+} 
+
+.credit{
+  background-image: url('../img/pix/CI.gif');
+} 
+
+.reduction{
+  background-image: url('../img/pix/RI.gif');
 } 
 
 #patate{
@@ -1229,9 +1268,12 @@ footer{
   100% {display:  none;opacity: 0;}
 }
 
+#accueil a,
 footer button{
+  color:#fff;
   background: none;
   border: none;
+  text-shadow: 0 0 1px #333;
 }
 
 /* input pour l'equiv seul */
@@ -1272,7 +1314,9 @@ footer button{
   .time-box:nth-child(3) {
     margin-left: 0;
   }
-
+  #patate {
+    display:none;
+  }
 }  
 /*egalisation visuel pour ecran de bureau*/
 @media screen and (min-width: 1024px) { 

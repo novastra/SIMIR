@@ -3,12 +3,16 @@
 //######## init de la situation du foyer ########
 var annee = new Date().getFullYear();
 var salairos = 0;
+var bnc = 0;
+var bic = 0;
 var foncios = 0;
 var boursos = 0;
 var adultos = 0;
 var enfantos = 0;
 var situatios = "C"; //celibataire par défaut
 resultos = 0;
+var credit = 0;
+var reduction = 0;
 
 // ######## SETUP de l'app ########
 $( document ).ready(function() {
@@ -22,9 +26,7 @@ $( document ).ready(function() {
   });
     
   // fx jquery drag and drop 
-  $( "#shopElements li.situation" ).hide();
-  $( "#shopElements li.enfant" ).hide();
-  $( "#shopElements li.revenu" ).hide();
+  $( ".enfant, #contSitu, #contReve, #contAutr" ).hide();
 
   $( "#shopElements li" ).draggable({
     cancel: ".descr, .euro, .mont, .modMont",
@@ -95,8 +97,8 @@ $( document ).ready(function() {
     $(".logo span").toggleClass("patate");
   });
 
-  //bloque la saisie de texte dans input revenus
-  document.querySelector("input.mont").addEventListener("keyup", function () {
+   //bloque la saisie de texte dans input revenus
+  $(".mont").on("keyup", function () {
     this.value = this.value.replace(/\D/, "")
   });
 
@@ -168,7 +170,7 @@ $( document ).ready(function() {
 
   //affichage détails du foyer
   $("#detFoyer").on('click', function(){
-    affMessage("<h3>Votre foyer</h3><br><ul><li>Nombre d'adultes : "+ adultos +" </li><li>Nombre d'enfants : "+ enfantos +" </li><li>Situation : "+ situatios +" </li><li>Revenus : <ul><li>Salaires : "+ salairos +" €</li><li>Foncier : "+ foncios +" €</li><li>Bourse : "+ boursos +" €</li></ul></li></ul>");
+    affMessage("<h3>Votre foyer</h3><br><ul><li>Nombre d'adultes : "+ adultos +" </li><li>Nombre d'enfants : "+ enfantos +" </li><li>Situation : "+ situatios +" </li><li>Revenus : <ul><li>Salaires : "+ salairos +" €</li><li>BIC : "+ bic +" €</li><li>BNC : "+ bnc +" €</li><li>Foncier : "+ foncios +" €</li><li>Bourse : "+ boursos +" €</li></ul></li><li>Crédit d'impôts : "+ credit +" €</li><li>Réductions d'impôts : "+ reduction +" €</li></ul>");
   });
 
   //bouton de reload d'exemples
@@ -211,12 +213,16 @@ var calculat = function(){
   //reset de la situation du foyer pour sécuriser le handler du drag and drop
   resultos = 0
   salairos = 0;
+  bnc = 0;
+  bic = 0;
   foncios = 0;
   boursos = 0;
   adultos = 0;
   enfantos = 0;
   situatios = "C"; //celibataire par défaut
-
+  credit = 0;  
+  reduction = 0;
+  
   // Maj des variables foyer  --> if plutot que else is si on decide de faire porter plusieurs data par elem
   x = $("#contFoyer li");
   for(var i=0; i< x.length; i++) {
@@ -225,6 +231,18 @@ var calculat = function(){
       elem.find("input.mont").prop('disabled', true);
       if (elem.hasClass("salaire")){
         salairos += parseInt(elem.data('val'));
+      }
+	  else if (elem.hasClass("bnc")){
+        bnc += parseInt(elem.data('val'));
+      }	 
+	  else if (elem.hasClass("bic")){
+        bic += parseInt(elem.data('val'));
+      }
+	  else if (elem.hasClass("credit")){
+        credit += parseInt(elem.data('val'));
+      }
+	  else if (elem.hasClass("reduction")){
+        reduction += parseInt(elem.data('val'));
       }
       else if (elem.hasClass("foncier")){
         foncios += parseInt(elem.data('val'));
@@ -251,40 +269,30 @@ var calculat = function(){
   //affichage de plus d'éléments selon le nombre d'adultes -> enfants, pacs etc
   if (adultos >= 1){
     $( "#shopElements li.enfant" ).show(500);
-    $( "#shopElements li.revenu" ).show();
+    $( "#contReve, #contAutr" ).show();
   }
   else{ 
     $("#contFoyer li").remove();
     location.reload();
   };
   if (adultos >= 2){
-    $( "#shopElements li.situation" ).show(300);
-    $( "#shopElements li.adu" ).hide();
+	  
+    $( "#contSitu" ).show(300);
+    $( "#shopElements li.adu" ).hide(300);
   }
   else{
-    $( "#shopElements li.situation" ).hide();
+    $( "#contSitu" ).hide();
     $("#contFoyer li.situation").remove();
     var situatios = "C";
-    $( "#shopElements li.adu" ).show();
+    $( "#shopElements li.adu" ).show(300);
   };
   if (situatios != "C"){
-    $( "#shopElements li.situation" ).hide();
+    $( "#contSitu" ).hide();
   }
 
-  /*
-  1AJ =sal decla = TSHALLOV
-  1BJ =sal conj = TSHALLOC
-  4BE =rev micro foncier = RFMIC
-  3VG = revenu mobilier bours = BPVRCM
-  0AO = pacs = V_0AO
-  0AM = mariage = V_0AM
-  0AC = celib = V_0AC
-  0CF = nb enfants = V_0CF
-  */
-
   //mettre un appel direct à l'api IR lorsque le header CORS ne sera plus sur same origin
-  if (salairos+foncios+boursos > 0){
-    var apiReq = 'http://api.ir.openfisca.fr/api/1/calculate?calculee=IRN&saisies={%22V_ANREV%22:' + annee + ',%221AJ%22:' + salairos + ',%224BE%22:' + foncios + ',%223VG%22:' + boursos + ',%220A' + situatios + '%22:1,%220CF%22:' + enfantos + '}';
+  if (salairos+bic+bnc+foncios+boursos > 0){
+    //var apiReq = 'http://api.ir.openfisca.fr/api/1/calculate?calculee=IRN&saisies={%22V_ANREV%22:' + annee + ',%221AJ%22:' + salairos + ',%225LO%22:' + bic + ',%225JQ%22:' + bnc + ',%224BE%22:' + foncios + ',%223VG%22:' + boursos + ',%220A' + situatios + '%22:1,%220CF%22:' + enfantos + '}';
     $.ajax({
       xhrFields: {
         withCredentials: true
@@ -294,7 +302,7 @@ var calculat = function(){
       crossDomain: true,
       url: apiReq
     }).done(function (data) {
-      resultos = data;
+      resultos = data - credit - reduction; //modifier le fonctionnement des crédits et reductions
 
       $('#resultat').fadeIn( 1000 );
       $("#result").html(resultos + "€");

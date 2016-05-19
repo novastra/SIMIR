@@ -60,31 +60,49 @@
 <h1>Bienvenue sur Sim'IR!</h1>
 <p>Calculer et comprendre ce que représente votre impôt devient un jeu d'enfant.<br> Constituez votre foyer en y plaçant les éléments qui le composent.</p>
 <br>
-<p>Si vous connaissez déjà son montant, vous pouvez directement voir ce que cette somme représente en termes de service public &nbsp;<a class="btnn" href="equivalent.html">En savoir plus &raquo;</a> </p>
+<p>Le calcul est fait en temps réel à partir de la <a href="http://www.openfisca.fr/#calculette-imp%C3%B4ts" target="_blank">calculette IR</a> fournie par la DGFiP. Une simulation complète et officielle est disponibe <a href="http://www3.finances.gouv.fr/calcul_impot/2016/index.htm" target="_blank">ici</a> </p>
+<br>
+<p>Si vous connaissez déjà son montant, vous pouvez directement voir ce que cette somme représente en termes de services publics &nbsp;<a class="btnn" href="equivalent.html">Évaluer &raquo;</a> </p>
 </div>
 </div>
 
 <!-- Foyer -->
 <div id="foyer" class="row">
 
-<div id="contFoy" class="col-md-9">
+<div id="contFoy" class="col-xs-9">
 <h3><span class='glyphicon glyphicon-home'></span> Votre foyer <button id="detFoyer" role="button"><span class='glyphicon glyphicon-info-sign'></span></button></h3>
 <ul id="contFoyer" class="ui-droppable ui-sortable">
 <li class="placeholder descr"><p>Ajouter des éléments ici</p></li>
 </ul>  
 </div>
 
-<div id="contShop" class="col-md-3">
+<div id="contShop" class="col-xs-3">
 <h3>Elements <button id="patate" type="button" class="btnn" role="button"><span class='glyphicon glyphicon-refresh'></span> PixelArt / Patates</button> </h3>
 <ul id="shopElements">
+<div id="contPers" class="col-xs-12">
+<h4>Personnes</h4>
 <li class="ui-draggable adu homme" data-adu="1"><p class="descr">Homme</p></li>
 <li class="ui-draggable adu femme" data-adu="1"><p class="descr">Femme</p></li>
 <li class="ui-draggable enfant" data-enf="1"><p class="descr">Enfant</p></li>
-<li class="ui-draggable revenu salaire" data-val="0"><p class="descr">Salaires</p><button type="button" class="modMont moins"><span class='glyphicon glyphicon-minus'></span></button><button type="button" class="modMont plus"><span class='glyphicon glyphicon-plus'></span></button><input type="number" min="0" step="100" pattern="\d" class="mont" value="0" placeholder="0"/><span class="euro"/></li>
-<li class="ui-draggable revenu foncier" data-val="0"><p class="descr">Foncier</p><button type="button" class="modMont moins"><span class='glyphicon glyphicon-minus'></span></button><button type="button" class="modMont plus"><span class='glyphicon glyphicon-plus'></span></button><input type="number" min="0" step="100" pattern="\d" class="mont" value="0" placeholder="0"/><span class="euro"/></li>
-<li class="ui-draggable revenu bourse" data-val="0"><p class="descr">Bourse</p><button type="button" class="modMont moins"><span class='glyphicon glyphicon-minus'></span></button><button type="button" class="modMont plus"><span class='glyphicon glyphicon-plus'></span></button><input type="number" min="0" step="100" pattern="\d" class="mont" value="0" placeholder="0"/><span class="euro"/></li>
+</div>
+<div id="contSitu" class="col-xs-12">
+<h4>Situation</h4>
 <li class="ui-draggable situation mariage" data-sit="M"><p class="descr">Mariage</p></li>
 <li class="ui-draggable situation pacs" data-sit="O"><p class="descr">PACS</p></li>
+</div>
+<div id="contReve" class="col-xs-12">
+<h4>Revenus</h4>
+<li class="ui-draggable revenu salaire" data-val="0"><p class="descr">Salaires</p><button type="button" class="modMont moins"><span class='glyphicon glyphicon-minus'></span></button><button type="button" class="modMont plus"><span class='glyphicon glyphicon-plus'></span></button><input type="number" min="0" step="100" pattern="\d" class="mont" value="0" placeholder="0"/><span class="euro"/></li>
+<li class="ui-draggable revenu bic" data-val="0"><p class="descr">BIC</p><button type="button" class="modMont moins"><span class='glyphicon glyphicon-minus'></span></button><button type="button" class="modMont plus"><span class='glyphicon glyphicon-plus'></span></button><input type="number" min="0" step="100" pattern="\d" class="mont" value="0" placeholder="0"/><span class="euro"/></li>
+<li class="ui-draggable revenu bnc" data-val="0"><p class="descr">BNC</p><button type="button" class="modMont moins"><span class='glyphicon glyphicon-minus'></span></button><button type="button" class="modMont plus"><span class='glyphicon glyphicon-plus'></span></button><input type="number" min="0" step="100" pattern="\d" class="mont" value="0" placeholder="0"/><span class="euro"/></li>
+<li class="ui-draggable revenu foncier" data-val="0"><p class="descr">Foncier</p><button type="button" class="modMont moins"><span class='glyphicon glyphicon-minus'></span></button><button type="button" class="modMont plus"><span class='glyphicon glyphicon-plus'></span></button><input type="number" min="0" step="100" pattern="\d" class="mont" value="0" placeholder="0"/><span class="euro"/></li>
+<li class="ui-draggable revenu bourse" data-val="0"><p class="descr">Bourse</p><button type="button" class="modMont moins"><span class='glyphicon glyphicon-minus'></span></button><button type="button" class="modMont plus"><span class='glyphicon glyphicon-plus'></span></button><input type="number" min="0" step="100" pattern="\d" class="mont" value="0" placeholder="0"/><span class="euro"/></li>
+</div>
+<div id="contAutr" class="col-xs-12">
+<h4>Autre</h4>
+<li class="ui-draggable soustract credit" data-val="0"><p class="descr">Crédit</p><button type="button" class="modMont moins"><span class='glyphicon glyphicon-minus'></span></button><button type="button" class="modMont plus"><span class='glyphicon glyphicon-plus'></span></button><input type="number" min="0" step="100" pattern="\d" class="mont" value="0" placeholder="0"/><span class="euro"/></li>
+<li class="ui-draggable soustract reduction" data-val="0"><p class="descr">Réduction</p><button type="button" class="modMont moins"><span class='glyphicon glyphicon-minus'></span></button><button type="button" class="modMont plus"><span class='glyphicon glyphicon-plus'></span></button><input type="number" min="0" step="100" pattern="\d" class="mont" value="0" placeholder="0"/><span class="euro"/></li>
+</div>
 </ul>
 </div>
 
